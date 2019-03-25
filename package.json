@@ -1,6 +1,6 @@
 {
   "name": "project-2-egupsv",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "difference calculator",
   "main": "index.js",
   "bin": {
@@ -34,6 +34,10 @@
     "@babel/preset-env": "^7.4.2"
   },
   "dependencies": {
-    "commander": "^2.19.0"
+    "babel-eslint": "^10.0.1",
+    "commander": "^2.19.0",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
   }
 }
