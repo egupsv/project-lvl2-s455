@@ -1,0 +1,39 @@
+{
+  "name": "project-2-egupsv",
+  "version": "1.0.0",
+  "description": "difference calculator",
+  "main": "index.js",
+  "bin": {
+    "gendiff": "dist/bin/gendiff.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egupsv/project-lvl2-s455.git"
+  },
+  "author": "Sergey Egupov",
+  "keywords": [
+    "difference",
+    "project 2"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/egupsv/project-lvl2-s455/issues"
+  },
+  "homepage": "https://github.com/egupsv/project-lvl2-s455#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.2"
+  },
+  "dependencies": {
+    "commander": "^2.19.0"
+  }
+}
