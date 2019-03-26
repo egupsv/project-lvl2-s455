@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from 'fs';
-import gendiff from '../src/bin/gendiff.js';
+import gendiff from '../src/bin/gendiff';
 
 const fileBefore = '__tests__/__fixtures__/before.json';
 const fileAfter = '__tests__/__fixtures__/after.json';
