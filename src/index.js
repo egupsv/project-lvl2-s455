@@ -5,28 +5,20 @@ export default (fileBefore, fileAfter) => {
     const contentAfter = JSON.parse(fs.readFileSync(fileAfter));
     const keysBefore = Object.keys(contentBefore);
     const keysAfter = Object.keys(contentAfter);
-    const contentDiff = {};
-    const filterPlus = keysAfter.filter(e => !keysBefore.includes(e));
-    const filterMinus = keysBefore.filter(e => !keysAfter.includes(e));
-    const filterEq = keysAfter.filter(e => keysBefore.includes(e));
-    filterEq.forEach((e) => {
-      if (contentBefore[e] === contentAfter[e]) {
-        contentDiff[e] = contentAfter[e];
-      }
-      else {
-        const ePlus = `+ ${e}`;
-        const eMinus = `- ${e}`;
-        contentDiff[ePlus] = contentAfter[e];
-        contentDiff[eMinus] = contentBefore[e];
-      }
-    });
-    filterPlus.forEach((e) => {
-      const ePlus = `+ ${e}`;
-      contentDiff[ePlus] = contentAfter[e];
-    });
-    filterMinus.forEach((e) => {
-      const eMinus = `- ${e}`;
-      contentDiff[eMinus] = contentBefore[e];
-    });
-    return (contentDiff);
+    const arrUnion = keysBefore
+      .reduce((acc, e) => !acc.includes(e) ? [...acc, e] : acc, keysAfter)
+      .map((e) => [e, contentBefore[e], contentAfter[e]])
+      .reduce((acc, e) => {
+        if (e[1] === undefined) {
+          return [...acc, [`  + ${e[0]}:`, e[2]].join(' ')];
+        }
+        if (e[2] === undefined) {
+          return [...acc, [`  - ${e[0]}:`, e[1]].join(' ')];
+        }
+        if (e[1] === e[2]) {
+          return [...acc, [`    ${e[0]}:`, e[1]].join(' ')];
+        }
+        return [...acc, [`  + ${e[0]}:`, e[2]].join(' '), [`  - ${e[0]}:`, e[1]].join(' ')];
+      }, []);
+    return '{' + '\n' + arrUnion.join('\n') + '\n' + '}';
   };
