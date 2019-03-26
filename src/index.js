@@ -6,11 +6,14 @@ export default (fileBefore, fileAfter) => {
     const keysBefore = Object.keys(contentBefore);
     const keysAfter = Object.keys(contentAfter);
     const contentDiff = {};
-    const filterPlus = keysAfter.filter(e => !keysAfter.includes(e));
-    const filterMinus = keysBefore.filter(e => !keysBefore.includes(e));
+    const filterPlus = keysAfter.filter(e => !keysBefore.includes(e));
+    const filterMinus = keysBefore.filter(e => !keysAfter.includes(e));
     const filterEq = keysAfter.filter(e => keysBefore.includes(e));
     filterEq.forEach((e) => {
-      if (contentBefore[e] !== contentAfter[e]) {
+      if (contentBefore[e] === contentAfter[e]) {
+        contentDiff[e] = contentAfter[e];
+      }
+      else {
         const ePlus = `+ ${e}`;
         const eMinus = `- ${e}`;
         contentDiff[ePlus] = contentAfter[e];
@@ -18,12 +21,12 @@ export default (fileBefore, fileAfter) => {
       }
     });
     filterPlus.forEach((e) => {
-      const eMinus = `- ${e}`;
-      contentDiff[eMinus] = contentBefore[e];
-    });
-    filterMinus.forEach((e) => {
       const ePlus = `+ ${e}`;
       contentDiff[ePlus] = contentAfter[e];
     });
-    return contentDiff;
+    filterMinus.forEach((e) => {
+      const eMinus = `- ${e}`;
+      contentDiff[eMinus] = contentBefore[e];
+    });
+    return (contentDiff);
   };
