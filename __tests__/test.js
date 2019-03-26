@@ -2,6 +2,10 @@
 import fs from 'fs';
 import gendiff from '../src/bin';
 
+const fileBefore = '__tests__/__fixtures__/before.json';
+const fileAfter = '__tests__/__fixtures__/after.json';
+const expected = fs.readFileSync('__tests__/__fixtures__/expected.txt', 'utf-8');
+
 test('check step 1', (fileBefore, fileAfter) => {
-  expect(gendiff(fileBefore, fileAfter)).toBe(JSON.parse((fs.readFileSynce(expected.txt))));
+  expect(gendiff(fileBefore, fileAfter)).toBe(JSON.parse((fs.readFileSynce(expected))));
 });
