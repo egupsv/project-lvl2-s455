@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 export default (fileBefore, fileAfter) => {
     const contentBefore = JSON.parse(fs.readFileSync(fileBefore));
     const contentAfter = JSON.parse(fs.readFileSync(fileAfter));
@@ -23,5 +25,5 @@ export default (fileBefore, fileAfter) => {
       const ePlus = `+ ${e}`;
       contentDiff[ePlus] = contentAfter[e];
     });
-    console.log(contentDiff);
+    return contentDiff;
   };
