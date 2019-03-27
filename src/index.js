@@ -1,24 +1,25 @@
 import fs from 'fs';
+import _ from 'lodash';
 
-export default (fileBefore, fileAfter) => {
-  const contentBefore = JSON.parse(fs.readFileSync(fileBefore));
-  const contentAfter = JSON.parse(fs.readFileSync(fileAfter));
+const usePlusOrMinus = (key, before, after) => {
+  if (before[key] === undefined) {
+    return `  + ${key}: ${after[key]}`;
+  }
+  if (after[key] === undefined) {
+    return `  - ${key}: ${before[key]}`;
+  }
+  if (before[key] === after[key]) {
+    return `    ${key}: ${after[key]}`;
+  }
+  return `  + ${key}: ${after[key]}\n  - ${key}: ${before[key]}`;
+};
+
+export default (filePathBefore, filePathAfter) => {
+  const contentBefore = JSON.parse(fs.readFileSync(filePathBefore));
+  const contentAfter = JSON.parse(fs.readFileSync(filePathAfter));
   const keysBefore = Object.keys(contentBefore);
   const keysAfter = Object.keys(contentAfter);
-  const arrUnion = keysBefore
-    .reduce((acc, e) => (!acc.includes(e) ? [...acc, e] : acc), keysAfter)
-    .map(e => [e, contentBefore[e], contentAfter[e]])
-    .reduce((acc, e) => {
-      if (e[1] === undefined) {
-        return [...acc, [`  + ${e[0]}:`, e[2]].join(' ')];
-      }
-      if (e[2] === undefined) {
-        return [...acc, [`  - ${e[0]}:`, e[1]].join(' ')];
-      }
-      if (e[1] === e[2]) {
-        return [...acc, [`    ${e[0]}:`, e[1]].join(' ')];
-      }
-      return [...acc, [`  + ${e[0]}:`, e[2]].join(' '), [`  - ${e[0]}:`, e[1]].join(' ')];
-    }, []);
+  const arrUnion = _.union(keysBefore, keysAfter)
+    .map(e => usePlusOrMinus(e, contentBefore, contentAfter));
   return `{\n${arrUnion.join('\n')}\n}`;
 };

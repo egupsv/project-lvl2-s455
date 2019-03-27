@@ -10,6 +10,5 @@ program
   .option('-V, --version', 'output the version number')
   .option('-f, --format [type]', 'Output format')
   .arguments('<firstConfig> <secondConfig>')
-  .command('compare <pathToFileBefore> <pathToFileAfter>')
-  .action((pathToFileBefore, pathToFileAfter) => genDiff(pathToFileBefore, pathToFileAfter))
+  .action((firstConfig, secondConfig) => console.log(genDiff(firstConfig, secondConfig)))
   .parse(process.argv);
