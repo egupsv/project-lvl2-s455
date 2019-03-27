@@ -15,8 +15,8 @@ const usePlusOrMinus = (key, before, after) => {
 };
 
 export default (filePathBefore, filePathAfter) => {
-  const contentBefore = parse(filePathBefore);
-  const contentAfter = parse(filePathAfter);
+  const contentBefore = parse(`__tests__/__fixtures__/${filePathBefore}`);
+  const contentAfter = parse(`__tests__/__fixtures__/${filePathAfter}`);
   const keysBefore = Object.keys(contentBefore);
   const keysAfter = Object.keys(contentAfter);
   const arrUnion = _.union(keysBefore, keysAfter)
