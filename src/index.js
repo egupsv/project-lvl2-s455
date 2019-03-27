@@ -1,5 +1,5 @@
-import fs from 'fs';
 import _ from 'lodash';
+import parse from './parsers';
 
 const usePlusOrMinus = (key, before, after) => {
   if (before[key] === undefined) {
@@ -15,8 +15,8 @@ const usePlusOrMinus = (key, before, after) => {
 };
 
 export default (filePathBefore, filePathAfter) => {
-  const contentBefore = JSON.parse(fs.readFileSync(filePathBefore));
-  const contentAfter = JSON.parse(fs.readFileSync(filePathAfter));
+  const contentBefore = parse(filePathBefore);
+  const contentAfter = parse(filePathAfter);
   const keysBefore = Object.keys(contentBefore);
   const keysAfter = Object.keys(contentAfter);
   const arrUnion = _.union(keysBefore, keysAfter)
