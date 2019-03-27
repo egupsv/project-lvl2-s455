@@ -4,5 +4,5 @@
 [![Build Status](https://travis-ci.com/egupsv/project-lvl2-s455.svg?branch=master)](https://travis-ci.com/egupsv/project-lvl2-s455)
 [![asciicast](https://asciinema.org/a/20WkfODYIdFqV2c1dw5VIQSQt.svg)](https://asciinema.org/a/20WkfODYIdFqV2c1dw5VIQSQt)
 [![asciicast](https://asciinema.org/a/vdje1bZBMPo7rY1arTNtxoHJf.svg)](https://asciinema.org/a/vdje1bZBMPo7rY1arTNtxoHJf)
-[![asciicast](https://asciinema.org/a/GJAW5dkwuqkKhj42LeNJQmt83.svg)](https://asciinema.org/a/GJAW5dkwuqkKhj42LeNJQmt83)
-[![asciicast](https://asciinema.org/a/9QKycb7l0h7Kfi2VUsJvsiINt.svg)](https://asciinema.org/a/9QKycb7l0h7Kfi2VUsJvsiINt)
+[![asciicast](https://asciinema.org/a/sdLg4VkxLgvuUdG2AzdhSonvK.svg)](https://asciinema.org/a/sdLg4VkxLgvuUdG2AzdhSonvK)
+[![asciicast](https://asciinema.org/a/RrTdTGDnNq03wViEtNVkVquBq.svg)](https://asciinema.org/a/RrTdTGDnNq03wViEtNVkVquBq)
