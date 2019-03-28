@@ -1,5 +1,4 @@
 import yaml from 'js-yaml';
-import path from 'path';
 import ini from 'ini';
 
 const formats = {
@@ -8,4 +7,4 @@ const formats = {
   ini: ini.parse,
 };
 
-export default (filePath, content) => formats[path.extname(filePath).slice(1)](content);
+export default (format, content) => formats[format](content);
