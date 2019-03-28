@@ -1,6 +1,6 @@
 {
   "name": "project-2-egupsv",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "difference calculator",
   "main": "index.js",
   "bin": {
@@ -42,7 +42,10 @@
   "dependencies": {
     "commander": "^2.19.0",
     "ini": "^1.3.5",
+    "ini-parser": "0.0.2",
+    "iniparser": "^1.0.5",
     "js-yaml": "^3.13.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "project-1-egupsv": "^1.0.18"
   }
 }

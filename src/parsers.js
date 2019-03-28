@@ -1,12 +1,11 @@
 import yaml from 'js-yaml';
 import path from 'path';
-import fs from 'fs';
 import ini from 'ini';
 
 const formats = {
-  json: filePath => JSON.parse(fs.readFileSync(filePath)),
-  yaml: filePath => yaml.safeLoad(fs.readFileSync(filePath)),
-  ini: filePath => ini.parse(fs.readFileSync(filePath)),
+  json: JSON.parse,
+  yaml: yaml.safeLoad,
+  ini: ini.parse,
 };
 
-export default filePath => formats[path.extname(filePath).slice(1)](filePath);
+export default (filePath, content) => formats[path.extname(filePath).slice(1)](content);
