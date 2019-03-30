@@ -1,3 +1,3 @@
 export default data => {
- return data;
+  return data//.reduce((acc, e) => [...acc, e.key], []);
 };
