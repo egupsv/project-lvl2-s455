@@ -36,7 +36,6 @@ const makeAST = (before, after) => {
       const { name, result } = getPropertyAction(e, before, after);
       return { [name]: result(e, before, after, makeAST) };
     });
-  console.log(arrUnion);
   return arrUnion;
 };
 
