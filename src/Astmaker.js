@@ -2,39 +2,42 @@ import _ from 'lodash';
 
 const propertyActions = [
     {
-      name: 'plus',
+      name: 'added',
       check: (key, before, after) => !_.has(before, key),
-      value: (key, before, after) => after[key],
+      result: (key, before, after) => ({ key, value: after[key] }),
     },
     {
-      name: 'minus',
+      name: 'deleted',
       check: (key, before, after) => !_.has(after, key),
-      value: (key, before, after) => before[key],
+      result: (key, before, after) => ({ key, value: before[key] }),
     },
     {
       name: 'complexData',
       check: (key, before, after) => before[key] instanceof Object && after[key] instanceof Object,
-      children: (before, after, f) => f(before, after),
+      result: (key, before, after, f) => ({ key, children: f(before, after) }),
     },
     {
-      name: 'nothing',
+      name: 'unchanged',
       check: (key, before, after) => before[key] === after[key],
-      value: (key, before, after) => before[key],
+      result: (key, before, after) => ({ key, value: before[key] }),
     },
     {
-      name: 'both',
+      name: 'added_deleted',
       check: (key, before, after) => before[key] !== after[key],
-      valueBefore: (key, before, after) => before[key],
-      valueAfter: (key, before, after) => after[key],
+      result: (key, before, after) => ({ key, valueBefore: before[key], valueAfter: after[key] })
     },
   ];
 
 const getPropertyAction = (...arg) => _.find(propertyActions, ({ check }) => check(...arg));
 
-export default (before, after) => {
+const makeAST = (before, after) => {
   const arrUnion = _.union(Object.keys(before), Object.keys(after))
     .map(e => {
-      const { name, key, ...rest } = getPropertyAction(e, before, after);
-      return { name, key, ...rest };
-    })
+      const { name, result } = getPropertyAction(e, before, after);
+      return {[name]: result(e, before, after, makeAST)}; 
+    });
+  console.log (arrUnion);
+  return arrUnion;  
 };
+
+export default makeAST
