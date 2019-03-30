@@ -9,7 +9,7 @@ test.each(['json', 'yaml', 'ini'])('check json, yaml, ini', (format) => {
   expect(genDiff(pathToFileBefore, pathToFileAfter)).toBe(expected);
 });
 
-test.each(['json'])('check complex json, yaml, ini', (format) => {
+test.each(['json', 'yaml', 'ini'])('check complex json, yaml, ini', (format) => {
   const pathToFileBefore = `__tests__/__fixtures__/complexbefore.${format}`;
   const pathToFileAfter = `__tests__/__fixtures__/complexafter.${format}`;
   const expected = fs.readFileSync('__tests__/__fixtures__/complexexpected.txt', 'utf-8');
