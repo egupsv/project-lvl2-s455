@@ -3,7 +3,7 @@ import plain from './plain_renderer';
 
 const rendererFormat = {
   render,
-  plain, 
+  plain,
 };
 
 export default (ast, format = 'render') => rendererFormat[format](ast);
