@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import parse from './parsers';
 import makeAST from './Astmaker';
-import render from './renderer';
+import render from './renderers';
 
 const format = filePath => path.extname(filePath).slice(1);
 
