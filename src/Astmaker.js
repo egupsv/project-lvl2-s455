@@ -2,41 +2,41 @@ import _ from 'lodash';
 
 const propertyActions = [
   {
-    name: 'added',
     check: (key, before) => !_.has(before, key),
-    result: (key, before, after) => ({ key, value: after[key] }),
+    node: (key, before, after) => ({ key, value: after[key], name: 'added' }),
   },
   {
-    name: 'deleted',
     check: (key, before, after) => !_.has(after, key),
-    result: (key, before) => ({ key, value: before[key] }),
+    node: (key, before) => ({ key, value: before[key], name: 'deleted' }),
   },
   {
-    name: 'complexData',
     check: (key, before, after) => before[key] instanceof Object && after[key] instanceof Object,
-    result: (key, before, after, f) => ({ key, children: f(before[key], after[key]) }),
+    node: (key, before, after, f) => ({ key, children: f(before[key], after[key]), name: 'complexData' }),
   },
   {
-    name: 'unchanged',
     check: (key, before, after) => before[key] === after[key],
-    result: (key, before) => ({ key, value: before[key] }),
+    node: (key, before) => ({ key, value: before[key], name: 'unchanged' }),
   },
   {
-    name: 'added_deleted',
     check: (key, before, after) => before[key] !== after[key],
-    result: (key, before, after) => ({ key, valueBefore: before[key], valueAfter: after[key] }),
+    node: (key, before, after) => ({
+      key,
+      valueBefore: before[key],
+      valueAfter: after[key],
+      name: 'added_deleted',
+    }),
   },
 ];
 
 const getPropertyAction = (...arg) => _.find(propertyActions, ({ check }) => check(...arg));
 
 const makeAST = (before, after) => {
-  const arrUnion = _.union(Object.keys(before), Object.keys(after))
+  const union = _.union(Object.keys(before), Object.keys(after))
     .map((e) => {
-      const { name, result } = getPropertyAction(e, before, after);
-      return { [name]: result(e, before, after, makeAST) };
+      const { node } = getPropertyAction(e, before, after);
+      return node(e, before, after, makeAST);
     });
-  return arrUnion;
+  return union;
 };
 
 export default makeAST;

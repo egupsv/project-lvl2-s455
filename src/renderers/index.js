@@ -1,4 +1,4 @@
-import render from './renderer';
+import render from './tree_renderer';
 import plain from './plain_renderer';
 
 const rendererFormat = {
