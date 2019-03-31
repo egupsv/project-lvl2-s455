@@ -2,7 +2,7 @@ const stringify = (obj) => {
   if (obj instanceof Object) {
     return '[complex value]';
   }
-  if (typeof (obj) === 'string' && !(1 * obj)) {
+  if (typeof (obj) === 'string') {
     return `'${obj}'`;
   }
   return obj;
