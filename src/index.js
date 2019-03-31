@@ -6,7 +6,7 @@ import render from './renderers';
 
 const format = filePath => path.extname(filePath).slice(1);
 
-export default (filePathBefore, filePathAfter, outputFormat) => {
+export default (filePathBefore, filePathAfter, outputFormat = 'tree') => {
   const contentBefore = parse(format(filePathBefore), fs.readFileSync(filePathBefore, 'utf-8'));
   const contentAfter = parse(format(filePathAfter), fs.readFileSync(filePathAfter, 'utf-8'));
   return render(makeAST(contentBefore, contentAfter), outputFormat);

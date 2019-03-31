@@ -1,0 +1,10 @@
+Property 'common' Property 'setting2' was removed
+Prorepty 'setting3' was updated. From true to [complex value]
+Property 'setting6' Property 'ops' was added with value: 'vops'
+Property 'follow' was added with value: false
+Property 'setting4' was added with value: 'blah blah'
+Property 'setting5' was added with value: [complex value]
+Property 'group1' Prorepty 'baz' was updated. From 'bas' to 'bars'
+Prorepty 'nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]

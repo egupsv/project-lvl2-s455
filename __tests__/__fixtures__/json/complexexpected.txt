@@ -1,0 +1,98 @@
+[
+  {
+    "key": "common",
+    "children": [
+      {
+        "key": "setting1",
+        "value": "Value 1",
+        "name": "unchanged"
+      },
+      {
+        "key": "setting2",
+        "value": "200",
+        "name": "deleted"
+      },
+      {
+        "key": "setting3",
+        "valueBefore": true,
+        "valueAfter": {
+          "key": "value"
+        },
+        "name": "added_deleted"
+      },
+      {
+        "key": "setting6",
+        "children": [
+          {
+            "key": "key",
+            "value": "value",
+            "name": "unchanged"
+          },
+          {
+            "key": "ops",
+            "value": "vops",
+            "name": "added"
+          }
+        ],
+        "name": "complexData"
+      },
+      {
+        "key": "follow",
+        "value": false,
+        "name": "added"
+      },
+      {
+        "key": "setting4",
+        "value": "blah blah",
+        "name": "added"
+      },
+      {
+        "key": "setting5",
+        "value": {
+          "key5": "value5"
+        },
+        "name": "added"
+      }
+    ],
+    "name": "complexData"
+  },
+  {
+    "key": "group1",
+    "children": [
+      {
+        "key": "baz",
+        "valueBefore": "bas",
+        "valueAfter": "bars",
+        "name": "added_deleted"
+      },
+      {
+        "key": "foo",
+        "value": "bar",
+        "name": "unchanged"
+      },
+      {
+        "key": "nest",
+        "valueBefore": {
+          "key": "value"
+        },
+        "valueAfter": "str",
+        "name": "added_deleted"
+      }
+    ],
+    "name": "complexData"
+  },
+  {
+    "key": "group2",
+    "value": {
+      "abc": "12345"
+    },
+    "name": "deleted"
+  },
+  {
+    "key": "group3",
+    "value": {
+      "fee": "100500"
+    },
+    "name": "added"
+  }
+]
