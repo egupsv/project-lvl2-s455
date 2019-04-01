@@ -4,7 +4,7 @@ const render = (data, depth = 1) => {
   const tab = 4;
   const currentTab = tab * depth;
 
-  const stringify = obj => {
+  const stringify = (obj) => {
     if (obj instanceof Object) {
       return Object.keys(obj)
         .reduce((acc, e, i) => [...acc, `{\n${' '
@@ -13,7 +13,7 @@ const render = (data, depth = 1) => {
         .join('\n');
     }
     return obj;
-  }  
+  };
 
   const nodes = {
     added: (({ key, value }) => `${' '.repeat(currentTab - 2)}+ ${key}: ${stringify(value)}`),

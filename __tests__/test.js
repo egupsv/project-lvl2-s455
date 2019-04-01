@@ -33,10 +33,9 @@ test.each([
   const pathToFileAfter = `__tests__/__fixtures__/complexafter.${format}`;
   let name;
   if (format === 'ini' && outputFormat === 'json') {
-    name = 'complexexpected_ini.txt'
-  }
-  else {
-    name = 'complexexpected.txt'
+    name = 'complexexpected_ini.txt';
+  } else {
+    name = 'complexexpected.txt';
   }
   const expected = fs.readFileSync(`__tests__/__fixtures__/${outputFormat}/${name}`, 'utf-8');
   expect(genDiff(pathToFileBefore, pathToFileAfter, outputFormat)).toBe(expected);
