@@ -23,7 +23,7 @@ const propertyActions = [
       key,
       valueBefore: before[key],
       valueAfter: after[key],
-      name: 'added_deleted',
+      name: 'changed',
     }),
   },
 ];

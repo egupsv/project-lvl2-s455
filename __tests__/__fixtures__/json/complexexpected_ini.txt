@@ -9,7 +9,7 @@
       },
       {
         "key": "setting2",
-        "value": "200",
+        "value": 200,
         "name": "deleted"
       },
       {
@@ -84,14 +84,14 @@
   {
     "key": "group2",
     "value": {
-      "abc": "12345"
+      "abc": 12345
     },
     "name": "deleted"
   },
   {
     "key": "group3",
     "value": {
-      "fee": "100500"
+      "fee": 100500
     },
     "name": "added"
   }

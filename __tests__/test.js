@@ -31,6 +31,13 @@ test.each([
 ])('check complex json, yaml, ini', (format, outputFormat) => {
   const pathToFileBefore = `__tests__/__fixtures__/complexbefore.${format}`;
   const pathToFileAfter = `__tests__/__fixtures__/complexafter.${format}`;
-  const expected = fs.readFileSync(`__tests__/__fixtures__/${outputFormat}/complexexpected.txt`, 'utf-8');
+  let name;
+  if (format === 'ini' && outputFormat === 'json') {
+    name = 'complexexpected_ini.txt'
+  }
+  else {
+    name = 'complexexpected.txt'
+  }
+  const expected = fs.readFileSync(`__tests__/__fixtures__/${outputFormat}/${name}`, 'utf-8');
   expect(genDiff(pathToFileBefore, pathToFileAfter, outputFormat)).toBe(expected);
 });

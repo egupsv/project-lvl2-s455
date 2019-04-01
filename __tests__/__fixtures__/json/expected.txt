@@ -8,7 +8,7 @@
     "key": "timeout",
     "valueBefore": 50,
     "valueAfter": 20,
-    "name": "added_deleted"
+    "name": "changed"
   },
   {
     "key": "proxy",
