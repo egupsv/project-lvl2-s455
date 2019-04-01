@@ -1,31 +1,37 @@
 import _ from 'lodash';
 
-const render = (data, depth = 1) => {
-  const tab = 4;
-  const currentTab = tab * depth;
+const tab = 4;
 
-  const stringify = (obj) => {
-    if (obj instanceof Object) {
-      return Object.keys(obj)
-        .reduce((acc, e, i) => [...acc, `{\n${' '
-          .repeat(currentTab + tab)}${e}: ${Object.values(obj)[i]}\n${' '
-          .repeat(currentTab)}}`], [])
-        .join('\n');
-    }
+const currentTab = depth => tab * depth;
+
+const stringify = (obj, depth) => {
+  if (!(obj instanceof Object)) {
     return obj;
-  };
-
-  const nodes = {
-    added: (({ key, value }) => `${' '.repeat(currentTab - 2)}+ ${key}: ${stringify(value)}`),
-    deleted: (({ key, value }) => `${' '.repeat(currentTab - 2)}- ${key}: ${stringify(value)}`),
-    changed: (({ key, valueAfter, valueBefore }) => [`${' '
-      .repeat(currentTab - 2)}- ${key}: ${stringify(valueBefore)}`, `${' '
-      .repeat(currentTab - 2)}+ ${key}: ${stringify(valueAfter)}`]),
-    unchanged: (({ key, value }) => `${' '.repeat(currentTab)}${key}: ${stringify(value)}`),
-    complexData: (({ key, children }) => `${' '
-      .repeat(currentTab)}${key}: ${render(children, depth + 1)}`),
-  };
-  return `{\n${_.flatten(data.map(e => nodes[e.name](e))).join('\n')}\n${' '.repeat(currentTab - tab)}}`;
+  }
+  return Object.keys(obj)
+    .reduce((acc, e, i) => [...acc, `{\n${' '
+      .repeat(currentTab(depth) + tab)}${e}: ${Object.values(obj)[i]}\n${' '
+      .repeat(currentTab(depth))}}`], [])
+    .join('\n');
 };
+
+const nodes = {
+  added: ({ key, value }, depth) => `${' '
+    .repeat(currentTab(depth) - 2)}+ ${key}: ${stringify(value, depth)}`,
+  deleted: ({ key, value }, depth) => `${' '
+    .repeat(currentTab(depth) - 2)}- ${key}: ${stringify(value, depth)}`,
+  changed: ({ key, valueAfter, valueBefore }, depth) => [
+    `${' '.repeat(currentTab(depth) - 2)}- ${key}: ${stringify(valueBefore, depth)}`,
+    `${' '.repeat(currentTab(depth) - 2)}+ ${key}: ${stringify(valueAfter, depth)}`,
+  ],
+  unchanged: ({ key, value }, depth) => `${' '
+    .repeat(currentTab(depth))}${key}: ${stringify(value, depth)}`,
+  complexData: ({ key, children }, depth, render) => `${' '
+    .repeat(currentTab(depth))}${key}: ${render(children, depth + 1)}`,
+};
+
+const render = (data, depth = 1) => `{\n${_
+  .flatten(data.map(e => nodes[e.name](e, depth, render)))
+  .join('\n')}\n${' '.repeat(currentTab(depth) - tab)}}`;
 
 export default render;
